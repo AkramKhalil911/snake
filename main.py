@@ -31,15 +31,16 @@ while isTrue == True:
     if snake.newsnake[0].distance(food.pos()) < 15:
         food.move()
         snake.extend_snake()
-        scoreboard.score()
+        scoreboard.increasescore()
 
-    if snake.newsnake[0].xcor() == 300 or snake.newsnake[0].xcor() == -300 or snake.newsnake[0].ycor() == 300 or snake.newsnake[0].ycor() == -300:
-        scoreboard.gameover()
-        isTrue = False
+    for new_snake in snake.newsnake:
+        if new_snake.xcor() > 290 or new_snake.xcor() < -290 or new_snake.ycor() > 290 or new_snake.ycor() < -290:
+            scoreboard.reset()
+            snake.resetsnake()
 
     for snakebody in snake.newsnake[1:]:
         if snake.newsnake[0].distance(snakebody) < 10:
-            scoreboard.gameover()
-            isTrue = False
+            scoreboard.reset()
+            snake.resetsnake()
 
 screen.exitonclick()

@@ -53,3 +53,9 @@ class Snake:
             pass
         else:
             self.newsnake[0].setheading(270)
+
+    def resetsnake(self):
+        for new_snake in self.newsnake:
+            new_snake.goto(1000, 1000)
+        self.newsnake.clear()
+        self.create_snake()
