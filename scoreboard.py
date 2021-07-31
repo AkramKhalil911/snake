@@ -2,8 +2,9 @@ from turtle import Turtle
 class Scoreboard(Turtle):
     def __init__(self):
         super().__init__()
+        with open("data.txt", mode="r") as readfile:
+            self.highscore = int(readfile.read())
         self.score_number = 0
-        self.highscore = 0
         self.score()
 
     def score(self):
@@ -23,15 +24,10 @@ class Scoreboard(Turtle):
         self.score_number += 1
         self.updatescoreboard()
 
-    # def gameover(self):
-    #     self.goto(0, 0)
-    #     self.penup()
-    #     self.hideturtle()
-    #     self.color("white")
-    #     self.write(f"Game over", align="center", font=("Arial", 16, "normal"))
-
     def reset(self):
         if self.score_number > self.highscore:
             self.highscore = self.score_number
+            with open("data.txt", mode="w") as savedscore:
+                savedscore.write(str(self.highscore))
         self.score_number = 0
         self.updatescoreboard()
